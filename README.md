@@ -4,7 +4,7 @@
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
-  
+
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
@@ -30,6 +30,7 @@
 
 ```bash
 $ npm install
+$ yarn install
 ```
 
 ## Running the app
@@ -58,6 +59,31 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## API Usage
+
+```bash
+Create New User: POST /auth/register, add roles [admin, user]
+
+Login User: POST /auth/login
+
+Create A Brand: POST /brands/
+
+Create a new meal addon: POST /brands/:brandId/addons:
+
+Retrieve a list of all meal addons: GET /brands/:brandId/addons:
+
+Retrieve a single meal addon: GET /brands/:brandId/addons/:addonId:
+
+Update a single meal addon: PATCH /brands/:brandId/addons/:addonId:
+
+Delete a single meal addon: DELETE /brands/:brandId/addons/:addonId:
+
+Create a new category 'for' meal addons: POST /brands/:brandId/addon-categories:
+
+
+
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
@@ -70,4 +96,4 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## License
 
-  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
