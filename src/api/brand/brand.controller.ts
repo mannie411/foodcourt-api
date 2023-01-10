@@ -13,10 +13,10 @@ import { AuthGuard } from '@nestjs/passport';
 import { Role } from 'src/common';
 import { Roles } from 'src/decorators/roles.decorators';
 import { RolesGuard } from 'src/guards/roles.guard';
-import { Addon, Brand } from 'src/models';
+import { Addon, AddonCategory, Brand } from 'src/models';
 import { BrandService } from './brand.service';
 
-@Controller('brands')
+@Controller('api/brands')
 export class BrandController {
   constructor(private brandService: BrandService) {}
 
@@ -39,29 +39,36 @@ export class BrandController {
     return this.brandService.createAddons(payload);
   }
 
-  @Get(':brandId/addons/:addonId:')
-  getAddonsMeal() {
-    return null;
+  @Get(':brandId/addons/:addonId')
+  getAddonsMeal(@Param() params) {
+    const payload = { brandId: params.brandId, addonId: params.addonId };
+    return this.brandService.findOneAddon(payload);
   }
 
   @Patch(':brandId/addons/:addonId')
   @UseGuards(AuthGuard('jwt'))
   @Roles(Role.Admin)
-  updateAddons() {
-    return null;
+  updateAddons(@Param() params, @Body() payload) {
+    const data = {
+      brandId: params.brandId,
+      addonId: params.addonId,
+      props: payload,
+    };
+    return this.brandService.updateAddon(data);
   }
 
-  @Delete(':brandId/addons/:addonId:')
+  @Delete(':brandId/addons/:addonId')
   @UseGuards(AuthGuard('jwt'))
   @Roles(Role.Admin)
-  deleteAddons() {
-    return null;
+  deleteAddons(@Param() params) {
+    const payload = { brandId: params.brandId, addonId: params.brandId };
+    return this.brandService.deleteAddon(payload);
   }
 
   @Post(':brandId/addon-categories')
   @UseGuards(AuthGuard('jwt'))
   @Roles(Role.Admin)
-  createAddonsCategory() {
-    return null;
+  createAddonsCategory(@Body() payload: Partial<AddonCategory>) {
+    return this.brandService.createAddonsCategory(payload);
   }
 }
